@@ -17,6 +17,5 @@ Gem::Specification.new do |gem|
   # Gem dependencies
   gem.add_dependency("aws-sdk")
   gem.add_dependency("capistrano")
-  gem.add_dependency("haml")
   gem.add_dependency("mime-types")
 end

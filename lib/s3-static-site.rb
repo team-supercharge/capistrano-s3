@@ -1,4 +1,3 @@
-require 'haml'
 require 'aws/s3'
 require 'mime/types'
 
@@ -51,19 +50,7 @@ Capistrano::Configuration.instance(true).load do
             path.gsub!(/^\//, "") # Remove preceding slash for S3
 
             contents = case File.extname(path)
-            when ".haml"
-              path.gsub!(".haml", "")
-
-              engine = Haml::Engine.new(File.read(file))
-              engine.render
-            when ".sass"
-              path.gsub!(".sass", "")
-
-              engine = Sass::Engine.new(File.read(file))
-              engine.render
-            else
-              open(file)
-            end
+            open(file)
 
             types = MIME::Types.type_for(File.basename(file))
             if types.empty?

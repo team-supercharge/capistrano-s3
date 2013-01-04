@@ -43,10 +43,6 @@ s3-static-site sets files `:content_type` and `:acl` to `:public_read`, add or o
 
 See aws-sdk [S3Object.write doc](http://rubydoc.info/github/amazonwebservices/aws-sdk-for-ruby/master/AWS/S3/S3Object#write-instance_method) for all available options.
 
-### Built-in HAML template rendering and SASS compile
-  
-On deployment, `.haml` and `.sass` are generated and uploaded (source .haml and .sass are not uploaded).
-
 ### Advanced static website generation & assets management
 
 If you wish to manage your assets with a packaging system, a simple way do to it
