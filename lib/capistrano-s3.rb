@@ -2,7 +2,7 @@ require 'aws/s3'
 require 'mime/types'
 
 unless Capistrano::Configuration.respond_to?(:instance)
-  abort "s3-static-site requires Capistrano >= 2."
+  abort "capistrano-s3 requires Capistrano >= 2."
 end
 
 Capistrano::Configuration.instance(true).load do
