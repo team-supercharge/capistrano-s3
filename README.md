@@ -1,4 +1,4 @@
-# s3-static-site
+# capistrano-s3
 
 > Allows static websites deployment to Amazon S3 website buckets using Capistrano.
 
@@ -20,11 +20,11 @@ Setup capistrano, create a public folder and set your S3 bucket configurations i
 
 ### Configuring deployment
 
-s3-static-site overrides the default Capistrano recipes for Rails projects with its own simple s3 publishing scripts.
+capistrano-s3 overrides the default Capistrano recipes for Rails projects with its own simple s3 publishing scripts.
 
 ```ruby
 # config/deploy.rb
-require 's3-static-site'
+require 'capistrano-s3'
 
 set :bucket, "www.cool-website-bucket.com"
 set :access_key_id, "CHANGETHIS"
@@ -37,7 +37,7 @@ and  configure a bucket per stage configuration.
 
 #### S3 write options
 
-s3-static-site sets files `:content_type` and `:acl` to `:public_read`, add or override with :
+capistrano-s3 sets files `:content_type` and `:acl` to `:public_read`, add or override with :
 
 ```ruby
 set :bucket_write_options, {
@@ -47,28 +47,21 @@ set :bucket_write_options, {
 
 See aws-sdk [S3Object.write doc](http://rubydoc.info/github/amazonwebservices/aws-sdk-for-ruby/master/AWS/S3/S3Object#write-instance_method) for all available options.
 
-### Advanced static website generation & assets management
+### Website generation & assets management
 
 If you wish to manage your assets with a packaging system, a simple way do to it
 is using a combination of :
 
-- [Sinatra](https://github.com/sinatra/sinatra) : simple web framework that we extend for our needs
-- [Sinatra-AssetPack](https://github.com/rstacruz/sinatra-assetpack) : deals with version management for all kind of assets
-- [Sinatra-Static](https://github.com/paulasmuth/sinatra-static) : generate your complete website in `public/`, allowing an `s3-static-site` deployment
-
-IMPORTANT : to achieve `Sinatra-AssetPack` and `Sinatra-Static` compatibility, see [pull request #1](https://github.com/paulasmuth/sinatra-static/pull/1)
-or use [a patched fork](https://github.com/hooktstudios/sinatra-static).
+- [sinatra](https://github.com/sinatra/sinatra) : simple web framework that we extend for our needs
+- [sinatra-assetpack](https://github.com/hooktstudios/sinatra-assetpack) : deals with version management for all kind of assets
+- [sinatra-export](https://github.com/hooktstudios/sinatra-export) : generate your complete website in `public/`, allowing an `s3-static-site` deployment
 
 Once you get this together, add a capistrano task to trigger website generation before deploy :
 
 ```ruby
 # config/deploy.rb
 before 'deploy' do
-  run_locally "bundle exec ruby app.rb"
+  run_locally "bundle exec ruby sinata:export"
   run_locally "bundle exec rake assetpack:build"
 end
 ```
-
-## Copyright
-
-Copyright (c) 2012 Josh Delsman & miomoba, Inc. See LICENSE.txt for details.
