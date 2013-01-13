@@ -61,7 +61,7 @@ Once you get this together, add a capistrano task to trigger website generation 
 ```ruby
 # config/deploy.rb
 before 'deploy' do
-  run_locally "bundle exec ruby sinata:export"
+  run_locally "bundle exec ruby sinatra:export"
   run_locally "bundle exec rake assetpack:build"
 end
 ```
