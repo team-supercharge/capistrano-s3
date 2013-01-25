@@ -2,6 +2,9 @@
 
 > Allows static websites deployment to Amazon S3 website buckets using Capistrano.
 
+[![Dependency Status](https://gemnasium.com/hooktstudios/capistrano-s3.png)](https://gemnasium.com/hooktstudios/capistrano-s3)
+[![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/hooktstudios/capistrano-s3)
+
 ## Hosting your website with Amazon S3
 
 S3 provides special website enabled buckets that allows you to deliver website pages directly from S3.
