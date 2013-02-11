@@ -1,3 +1,4 @@
+require 'capistrano'
 require 'capistrano/s3/publisher'
 
 unless Capistrano::Configuration.respond_to?(:instance)
@@ -10,6 +11,7 @@ Capistrano::Configuration.instance(true).load do
   end
   
   _cset :deployment_path, Dir.pwd.gsub("\n", "") + "/public"
+  _cset :bucket_write_options, :acl => :public_read
   
   # Deployment recipes
   namespace :deploy do
