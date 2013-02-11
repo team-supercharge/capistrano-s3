@@ -1,21 +1,25 @@
 # -*- encoding: utf-8 -*-
 
-Gem::Specification.new do |gem|
-  gem.authors       = ["Jean-Philippe Doyle","Josh Delsman"]
-  gem.email         = ["jeanphilippe.doyle@hooktstudios.com"]
-  gem.description   = "Using Ruby and Capistrano, build and deploy a static website to Amazon S3"
-  gem.summary       = "Using Ruby and Capistrano, build and deploy a static website to Amazon S3"
-  gem.homepage      = "http://github.com/hooktstudios/capistrano-s3"
-  gem.licenses      = ["MIT"]
-  gem.files         = `git ls-files`.split($\)
-  gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
-  gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
-  gem.name          = "capistrano-s3"
-  gem.require_paths = ["lib"]
-  gem.version       = "0.2.2"
+Gem::Specification.new do |s|
+  s.authors       = ['Jean-Philippe Doyle','Josh Delsman']
+  s.email         = ['jeanphilippe.doyle@hooktstudios.com']
+  s.description   = 'Enables static websites deployment to Amazon S3 website buckets using Capistrano.'
+  s.summary       = 'Build and deploy a static website to Amazon S3'
+  s.homepage      = 'http://github.com/hooktstudios/capistrano-s3'
+  s.licenses      = ['MIT']
+  s.files         = `git ls-files`.split($\)
+  s.executables   = s.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
+  s.test_files    = s.files.grep(%r{^(test|spec|features)/})
+  s.name          = 'capistrano-s3'
+  s.require_paths = ['lib']
+  s.version       = '0.2.3'
 
   # Gem dependencies
-  gem.add_dependency("aws-sdk")
-  gem.add_dependency("capistrano")
-  gem.add_dependency("mime-types")
+  s.add_dependency 'aws-sdk'
+  s.add_dependency 'capistrano'
+  s.add_dependency 'mime-types'
+
+  s.add_development_dependency 'rake'
+  s.add_development_dependency 'rspec'
+  s.add_development_dependency 'mocha'
 end

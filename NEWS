@@ -1,3 +1,7 @@
+New in 0.2.3
+
+* Bugfix : fixed error when no specific bucket_write_options is set.
+
 New in 0.2.2
 
 * Bugfix : fixed an error caused previously by removing SASS & HAML dependency.

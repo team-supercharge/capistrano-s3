@@ -1,6 +1,6 @@
 # capistrano-s3
 
-> Allows static websites deployment to Amazon S3 website buckets using Capistrano.
+> Enables static websites deployment to Amazon S3 website buckets using Capistrano.
 
 [![Dependency Status](https://gemnasium.com/hooktstudios/capistrano-s3.png)](https://gemnasium.com/hooktstudios/capistrano-s3)
 [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/hooktstudios/capistrano-s3)
