@@ -51,7 +51,7 @@ set :bucket_write_options, {
 
 See aws-sdk [S3Object.write doc](http://rubydoc.info/github/amazonwebservices/aws-sdk-for-ruby/master/AWS/S3/S3Object#write-instance_method) for all available options.
 
-### Website generation & assets management
+### Complete static website generation
 
 If you wish to manage your assets with a packaging system, a simple way do to it
 is using a combination of :
@@ -69,3 +69,9 @@ before 'deploy' do
   run_locally "bundle exec rake assetpack:build"
 end
 ```
+
+## Credits
+
+![hooktstudios](http://hooktstudios.com/logo.png)
+
+[capistrano-s3](https://rubygems.org/gems/capistrano-s3) is maintained and funded by [hooktstudios](http://hooktstudios.com)
