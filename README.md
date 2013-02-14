@@ -71,6 +71,10 @@ end
 
 See our boilerplate [sinatra-static-bp](https://github.com/hooktstudios/sinatra-static-bp) for an exemple of the complete setup.
 
+## Contributing
+
+See [CONTRIBUTING.md](https://github.com/hooktstudios/capistrano-s3/blob/master/CONTRIBUTING.md) for more details on contributing and running test.
+
 ## Credits
 
 ![hooktstudios](http://hooktstudios.com/logo.png)
