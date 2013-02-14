@@ -51,16 +51,15 @@ set :bucket_write_options, {
 
 See aws-sdk [S3Object.write doc](http://rubydoc.info/github/amazonwebservices/aws-sdk-for-ruby/master/AWS/S3/S3Object#write-instance_method) for all available options.
 
-### Complete static website generation
+## Exemple of usage
 
-If you wish to manage your assets with a packaging system, a simple way do to it
-is using a combination of :
+Our Ruby stack for static websites :
 
-- [sinatra](https://github.com/sinatra/sinatra) : simple web framework that we extend for our needs
-- [sinatra-assetpack](https://github.com/rstacruz/sinatra-assetpack) : deals with version management for all kind of assets
-- [sinatra-export](https://github.com/hooktstudios/sinatra-export) : generate your complete website in `public/`, allowing an `s3-static-site` deployment
+- [sinatra](https://github.com/sinatra/sinatra) : awesome simple ruby web framework
+- [sinatra-assetpack](https://github.com/rstacruz/sinatra-assetpack) : deals with assets management, build static files into `public/`
+- [sinatra-export](https://github.com/hooktstudios/sinatra-export) : exports all sinatra routes into `public/` as html or other common formats (json, csv, etc)
 
-Once you get this together, add a capistrano task to trigger website generation before deploy :
+Mixing it in a capistrano task :
 
 ```ruby
 # config/deploy.rb
@@ -69,6 +68,8 @@ before 'deploy' do
   run_locally "bundle exec rake assetpack:build"
 end
 ```
+
+See our boilerplate [sinatra-static-bp](https://github.com/hooktstudios/sinatra-static-bp) for an exemple of the complete setup.
 
 ## Credits
 
