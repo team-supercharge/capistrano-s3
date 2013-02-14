@@ -57,7 +57,7 @@ If you wish to manage your assets with a packaging system, a simple way do to it
 is using a combination of :
 
 - [sinatra](https://github.com/sinatra/sinatra) : simple web framework that we extend for our needs
-- [sinatra-assetpack](https://github.com/hooktstudios/sinatra-assetpack) : deals with version management for all kind of assets
+- [sinatra-assetpack](https://github.com/rstacruz/sinatra-assetpack) : deals with version management for all kind of assets
 - [sinatra-export](https://github.com/hooktstudios/sinatra-export) : generate your complete website in `public/`, allowing an `s3-static-site` deployment
 
 Once you get this together, add a capistrano task to trigger website generation before deploy :
