@@ -75,4 +75,4 @@ See our boilerplate [sinatra-static-bp](https://github.com/hooktstudios/sinatra-
 
 ![hooktstudios](http://hooktstudios.com/logo.png)
 
-[capistrano-s3](https://rubygems.org/gems/capistrano-s3) is maintained and funded by [hooktstudios](http://hooktstudios.com)
+[capistrano-s3](https://rubygems.org/gems/capistrano-s3) is maintained and funded by [hooktstudios](http://github.com/hooktstudios)
