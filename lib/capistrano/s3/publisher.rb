@@ -3,11 +3,15 @@ require 'mime/types'
 
 module Publisher
 
+  LAST_PUBLISHED_FILE = '.last_published'
+
   def self.publish!(key, secret, bucket, source, extra_options)
     s3 = self.establish_connection!(key, secret)
 
     self.files(source).each do |file|
       if !File.directory?(file)
+        next if self.published?(file)
+
         path = self.base_file_path(source, file)
         path.gsub!(/^\//, "") # Remove preceding slash for S3
 
@@ -28,6 +32,8 @@ module Publisher
         s3.buckets[bucket].objects[path].write(contents, options)
       end
     end
+
+    FileUtils.touch(LAST_PUBLISHED_FILE)
   end
 
   def self.clear!(key, secret, bucket)    
@@ -53,5 +59,9 @@ module Publisher
   
     def self.files(deployment_path)
       Dir.glob("#{deployment_path}/**/*")
+    end
+
+    def self.published?(file)
+      File.mtime(file) < File.mtime(LAST_PUBLISHED_FILE)
     end
 end
