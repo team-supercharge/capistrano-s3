@@ -62,6 +62,7 @@ module Publisher
     end
 
     def self.published?(file)
+      return false unless File.exists? LAST_PUBLISHED_FILE
       File.mtime(file) < File.mtime(LAST_PUBLISHED_FILE)
     end
 end
