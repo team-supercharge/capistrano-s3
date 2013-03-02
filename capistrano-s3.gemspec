@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.test_files    = s.files.grep(%r{^(test|spec|features)/})
   s.name          = 'capistrano-s3'
   s.require_paths = ['lib']
-  s.version       = '0.2.3'
+  s.version       = '0.2.4'
 
   # Gem dependencies
   s.add_dependency 'aws-sdk'
