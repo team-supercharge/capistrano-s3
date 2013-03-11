@@ -62,7 +62,7 @@ set :bucket_write_options, {
 }
 ```
 
-See aws-sdk [S3Object.write doc](http://rubydoc.info/github/amazonwebservices/aws-sdk-for-ruby/master/AWS/S3/S3Object#write-instance_method) for all available options.
+See aws-sdk [S3Object.write doc](http://docs.aws.amazon.com/AWSRubySDK/latest/AWS/S3/S3Object.html#write-instance_method) for all available options.
 
 ## Exemple of usage
 
