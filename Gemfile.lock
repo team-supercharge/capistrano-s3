@@ -7,7 +7,7 @@ PATH
       mime-types
 
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
     aws-sdk (1.8.3.1)
       json (~> 1.4)
