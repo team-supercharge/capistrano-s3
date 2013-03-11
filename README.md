@@ -8,23 +8,30 @@
 
 ## Hosting your website with Amazon S3
 
-S3 provides special website enabled buckets that allows you to deliver website pages directly from S3.
-The most important difference is that theses buckets serves an index document (ex. index.html) whenever a user specifies the URL for the root of your website, or a subfolder. And you can point your domain name directly to the S3 bucket cname.
+Amazon S3 provides special websites enabled buckets that allows you to serve web pages from S3.
 
-To learn how to setup your website bucket, see [Amazon Documentation](http://docs.amazonwebservices.com/AmazonS3/latest/dev/index.html?HostingWebsiteQS1.html).
+To learn how to setup your website bucket, see [Amazon Documentation](http://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html).
 
 ## Getting started
 
-Setup capistrano, create a public folder and set your S3 bucket configurations in `deploy.rb`.
+Create a project `Gemfile` :
 
-    $ capify .
-    $ mkdir public
-    $ touch config/deploy.rb #see config instructions bellow
-    $ cap deploy
+```ruby
+source 'https://rubygems.org'
+gem 'capistrano-s3'
+```
 
-### Configuring deployment
+### Setup
 
-capistrano-s3 overrides the default Capistrano recipes for Rails projects with its own simple s3 publishing scripts.
+Install gem, init capistrano & create a public folder that will be published :
+
+    bundle install
+    bundle exec capify .
+    mkdir public
+
+### Credentials
+
+Set your S3 bucket credentials :
 
 ```ruby
 # config/deploy.rb
@@ -35,9 +42,15 @@ set :access_key_id, "CHANGETHIS"
 set :secret_access_key, "CHANGETHIS"
 ```
 
+### Deploying
+
+Add content to you public folder and deploy with :
+
+    cap deploy
+
 If you want to deploy to multiple buckets, have a look at
 [Capistrano multistage](https://github.com/capistrano/capistrano/wiki/2.x-Multistage-Extension)
-and  configure a bucket per stage configuration.
+and configure a bucket per stage configuration.
 
 #### S3 write options
 
