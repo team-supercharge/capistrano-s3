@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.authors       = ['Jean-Philippe Doyle','Josh Delsman']
+  s.authors       = ['Jean-Philippe Doyle','Josh Delsman','Aleksandrs Ļedovskis','Douglas Jarquin']
   s.email         = ['jeanphilippe.doyle@hooktstudios.com']
   s.description   = 'Enables static websites deployment to Amazon S3 website buckets using Capistrano.'
   s.summary       = 'Build and deploy a static website to Amazon S3'
@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.test_files    = s.files.grep(%r{^(test|spec|features)/})
   s.name          = 'capistrano-s3'
   s.require_paths = ['lib']
-  s.version       = '0.2.5'
+  s.version       = '0.2.6'
   s.cert_chain  = ['certs/j15e.pem']
   s.signing_key = File.expand_path('~/.gem/private_key.pem') if $0 =~ /gem\z/
 

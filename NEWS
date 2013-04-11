@@ -1,3 +1,10 @@
+New in 0.2.6
+
+* Feature : Adds ability to specify redirect location for files. (#13) @aledovsky
+* Feature : Adds S3 endpoint selection option. (#11) @aledovsky
+* Improvement : Require fileutils to support newer rubies. (#10) @douglasjarquin
+* Bugfix : Pass a string to the content_type option (#11) @douglasjarquin
+
 New in 0.2.5
 
 * Improvement : signed gem.

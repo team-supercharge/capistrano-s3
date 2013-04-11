@@ -116,3 +116,5 @@ See [CONTRIBUTING.md](https://github.com/hooktstudios/capistrano-s3/blob/master/
 ![hooktstudios](http://hooktstudios.com/logo.png)
 
 [capistrano-s3](https://rubygems.org/gems/capistrano-s3) is maintained and funded by [hooktstudios](http://github.com/hooktstudios)
+
+Thanks & credits also to all other [contributors](https://github.com/hooktstudios/capistrano-s3/contributors).

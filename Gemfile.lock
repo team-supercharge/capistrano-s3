@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    capistrano-s3 (0.2.5)
+    capistrano-s3 (0.2.6)
       aws-sdk
       capistrano
       mime-types
