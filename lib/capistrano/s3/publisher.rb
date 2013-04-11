@@ -81,13 +81,13 @@ module Publisher
 
     def self.build_content_type_hash(file)
       type = MIME::Types.type_for(File.basename(file))
-      return unless type
+      return {} unless type
 
       { :content_type => type.first.content_type }
     end
 
     def self.build_redirect_hash(path, redirect_options)
-      return unless redirect_options && redirect_options[path]
+      return {} unless redirect_options && redirect_options[path]
 
       { :website_redirect_location => redirect_options[path] }
     end
