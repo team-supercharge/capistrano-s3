@@ -87,7 +87,7 @@ module Publisher
     end
 
     def self.build_redirect_hash(path, redirect_options)
-      return unless redirect_options
+      return unless redirect_options && redirect_options[path]
 
       { :website_redirect_location => redirect_options[path] }
     end
