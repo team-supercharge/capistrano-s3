@@ -1,5 +1,9 @@
 # capistrano-s3 changes
 
+## New in 0.2.7
+
+* Bugfix : support non-standard file extensions. (#14) @barvaz
+
 ## New in 0.2.6
 
 * Feature : Adds ability to specify redirect location for files. (#13) @aledovsky

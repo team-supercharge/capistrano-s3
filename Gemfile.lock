@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    capistrano-s3 (0.2.6)
+    capistrano-s3 (0.2.7)
       aws-sdk
       capistrano
       mime-types
@@ -19,14 +19,14 @@ GEM
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
-    highline (1.6.16)
+    highline (1.6.18)
     json (1.7.7)
     mime-types (1.22)
     net-scp (1.1.0)
       net-ssh (>= 2.6.5)
     net-sftp (2.1.1)
       net-ssh (>= 2.6.5)
-    net-ssh (2.6.6)
+    net-ssh (2.6.7)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
     nokogiri (1.5.9)
