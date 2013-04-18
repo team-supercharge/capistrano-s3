@@ -1,22 +1,24 @@
-New in 0.2.6
+# capistrano-s3 changes
+
+## New in 0.2.6
 
 * Feature : Adds ability to specify redirect location for files. (#13) @aledovsky
 * Feature : Adds S3 endpoint selection option. (#11) @aledovsky
 * Improvement : Require fileutils to support newer rubies. (#10) @douglasjarquin
 * Bugfix : Pass a string to the content_type option (#11) @douglasjarquin
 
-New in 0.2.5
+## New in 0.2.5
 
 * Improvement : signed gem.
 
-New in 0.2.4
+## New in 0.2.4
 
 * Bugfix : fixed error when .last_publish doesn't exist yet.
 
-New in 0.2.3
+## New in 0.2.3
 
 * Bugfix : fixed error when no specific bucket_write_options is set.
 
-New in 0.2.2
+## New in 0.2.2
 
 * Bugfix : fixed an error caused previously by removing SASS & HAML dependency.
