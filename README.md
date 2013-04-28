@@ -40,20 +40,41 @@ require 'capistrano/s3'
 set :bucket, "www.cool-website-bucket.com"
 set :access_key_id, "CHANGETHIS"
 set :secret_access_key, "CHANGETHIS"
-
-# If your bucket is not in the default US east region
-# set :s3_endpoint, 's3-eu-west-1.amazonaws.com'
 ```
 
 ### Deploying
 
-Add content to you public folder and deploy with the `cap deploy` command.
+Add content to you public folder and run `cap deploy`.
 
 If you want to deploy to multiple buckets, have a look at
 [Capistrano multistage](https://github.com/capistrano/capistrano/wiki/2.x-Multistage-Extension)
 and configure a bucket per stage configuration.
 
-#### Redirecting
+## Advanced options
+
+### Custom endpoint
+
+If your bucket is not in the default US Standard region,
+set [endpoint](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region)
+with :
+
+```ruby
+set :s3_endpoint, 's3-eu-west-1.amazonaws.com'
+```
+
+### Write options
+
+capistrano-s3 sets files `:content_type` and `:acl` to `:public_read`, add or override with :
+
+```ruby
+set :bucket_write_options, {
+    cache_control: "max-age=94608000, public"
+}
+```
+
+See aws-sdk [S3Client.put_object doc](http://docs.aws.amazon.com/AWSRubySDK/latest/AWS/S3/Client.html#put_object-instance_method) for all available options.
+
+### Redirecting
 
 Use `:redirect_options` to natively redirect (via HTTP 301 status code)
 any hosted page. For example:
@@ -65,18 +86,6 @@ set :redirect_options, {
 ```
 Valid redirect destination should either start with `http` or `https` scheme,
 or begin with leading slash `/`.
-
-#### S3 write options
-
-capistrano-s3 sets files `:content_type` and `:acl` to `:public_read`, add or override with :
-
-```ruby
-set :bucket_write_options, {
-    cache_control: "max-age=94608000, public"
-}
-```
-
-See aws-sdk [S3Client.put_object doc](http://docs.aws.amazon.com/AWSRubySDK/latest/AWS/S3/Client.html#put_object-instance_method) for all available options.
 
 ## Example of usage
 
