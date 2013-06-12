@@ -72,9 +72,9 @@ module Publisher
         :acl => :public_read,
       }
 
-      options.merge!( self.build_content_type_hash(file) )
-      options.merge!( self.build_redirect_hash(path, extra_options[:redirect]) )
-      options.merge!(extra_options[:write])
+      options.merge!(self.build_content_type_hash(file))
+      options.merge!(self.build_redirect_hash(path, extra_options[:redirect]))
+      options.merge!(extra_options[:write]) if extra_options[:write]
 
       s3.put_object(options)
     end
