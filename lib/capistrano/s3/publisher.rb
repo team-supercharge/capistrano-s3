@@ -2,7 +2,7 @@ require 'aws/s3'
 require 'mime/types'
 require 'fileutils'
 
-module Publisher
+module Capistrano::S3::Publisher
 
   LAST_PUBLISHED_FILE = '.last_published'
 

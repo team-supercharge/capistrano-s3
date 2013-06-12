@@ -1,9 +1,10 @@
 require 'spec_helper'
 
-describe Publisher do
+describe Capistrano::S3::Publisher do
   before do
     @root = File.expand_path('../', __FILE__)
-    FileUtils.rm(Publisher::LAST_PUBLISHED_FILE) if File.exist?(Publisher::LAST_PUBLISHED_FILE)
+    publish_file = Capistrano::S3::Publisher::LAST_PUBLISHED_FILE
+    FileUtils.rm(publish_file) if File.exist?(publish_file)
   end
 
   context "on publish!" do
@@ -11,7 +12,7 @@ describe Publisher do
       AWS::S3::Client.any_instance.expects(:put_object).times(4)
 
       path = File.join(@root, 'sample')
-      Publisher.publish!('s3.amazonaws.com', 'abc', '123', 'mybucket.amazonaws.com', path, {})
+      Capistrano::S3::Publisher.publish!('s3.amazonaws.com', 'abc', '123', 'mybucket.amazonaws.com', path, {})
     end
   end
 end
