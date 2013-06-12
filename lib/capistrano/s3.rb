@@ -1,5 +1,6 @@
 require 'capistrano'
 require 'capistrano/s3/publisher'
+require 'capistrano/s3/version'
 
 module Capistrano
   unless Configuration.respond_to?(:instance)
