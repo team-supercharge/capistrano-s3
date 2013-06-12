@@ -1,5 +1,5 @@
 language: ruby
-bundler_args: --without debug
+bundler_args: --without debug release
 rvm:
   - 1.9.3
   - 2.0.0

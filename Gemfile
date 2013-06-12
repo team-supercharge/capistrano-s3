@@ -11,4 +11,8 @@ group :test do
   gem 'mocha'
 end
 
+group :release do
+  gem 'gem-release'
+end
+
 gemspec
