@@ -2,6 +2,7 @@
 
 > Enables static websites deployment to Amazon S3 website buckets using Capistrano.
 
+[![Build Status](https://travis-ci.org/hooktstudios/capistrano-s3.png?branch=master)](https://travis-ci.org/hooktstudios/capistrano-s3)
 [![Dependency Status](https://gemnasium.com/hooktstudios/capistrano-s3.png)](https://gemnasium.com/hooktstudios/capistrano-s3)
 [![Code Climate](https://codeclimate.com/github/hooktstudios/capistrano-s3.png)](https://codeclimate.com/github/hooktstudios/capistrano-s3)
 [![Gem Version](https://badge.fury.io/rb/capistrano-s3.png)](https://rubygems.org/gems/capistrano-s3)
