@@ -4,19 +4,25 @@
 
 We love to work with people around the globe and make earth a better place for mankind!
 
+## Submit a pull request
+
 Please follow theses simples steps to contribute to this project :
 
-1. Fork the repo.
+1. Run the tests before & after doing anything.
 
-2. Rebase your code onto upstream master (this repository) if not up to date.
+2. Add specs regarding your code modification.
 
 3. Squash or fixup your commits to achieve a clean commit log.
 
-4. Submit a pull request explaining clearly changes.
+4. Rebase your code onto upstream master (this repository) if not up to date.
+
+5. Submit a pull request explaining changes.
+
+Thank you!
 
 ## Running the tests
 
-I am sorry [wilson](http://www.youtube.com/watch?v=wO_MYX_Oto0), there is no tests.
+As simple as running the `rake` command. The default `rake` task is `rake spec`.
 
 ## Syntax
 
