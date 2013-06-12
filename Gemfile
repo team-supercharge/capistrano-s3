@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 group :debug do
-  gem 'debugger'
+  gem 'debugger', :platform => :mri
   gem 'awesome_print'
 end
 
