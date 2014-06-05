@@ -1,6 +1,10 @@
 # CHANGELOG
 
-## v0.2.8
+## v0.2.9
+
+Bugfix : fix gemspec dependencies
+
+## v0.2.8 (yanked)
 
 Improvement : lock dependency to Capistrano v2 for current version
 Improvement : Update spec for new AWS SDK
