@@ -1,10 +1,10 @@
 PATH
   remote: .
   specs:
-    capistrano-s3 (0.2.8)
-      aws-sdk
+    capistrano-s3 (0.2.9)
+      aws-sdk (>= 1.11)
       capistrano (< 3)
-      mime-types
+      mime-types (>= 1.23)
 
 GEM
   remote: https://rubygems.org/
