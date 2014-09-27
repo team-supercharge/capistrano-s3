@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.signing_key = File.expand_path("~/.ssh/gem-private_key.pem") if $0 =~ /gem\z/
 
   # Gem dependencies
-  s.add_dependency 'aws-sdk', '>= 1.11'
+  s.add_dependency 'aws-sdk', '~> 1.11'
   s.add_dependency 'capistrano', '< 3'
-  s.add_dependency 'mime-types', '>= 1.23'
+  s.add_dependency 'mime-types', '~> 1.23'
 end

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v0.2.10
+
+Bugfix : loading issue (#18) @yhourdel
+
 ## v0.2.9
 
 Bugfix : fix gemspec dependencies
