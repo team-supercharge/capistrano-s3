@@ -1,6 +1,10 @@
 # CHANGELOG
 
-## v0.2.10
+## v0.2.11
+
+Updated signing certificate.
+
+## v0.2.10 (never published)
 
 Bugfix : loading issue (#18) @yhourdel
 
