@@ -45,7 +45,7 @@ set :secret_access_key, "CHANGETHIS"
 
 ### Deploying
 
-Add content to you public folder and run `cap deploy`.
+Add content to your public folder and run `cap deploy`.
 
 If you want to deploy to multiple buckets, have a look at
 [Capistrano multistage](https://github.com/capistrano/capistrano/wiki/2.x-Multistage-Extension)
