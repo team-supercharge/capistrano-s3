@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v0.3.0
+
+Feature:     Add Capistrano 3.x support (#17)
+Improvement: Set correct headers for ".gz" files. (#21)
+
 ## v0.2.11
 
 Updated signing certificate.
