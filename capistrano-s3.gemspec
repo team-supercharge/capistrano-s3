@@ -4,7 +4,7 @@ require 'capistrano/s3/version'
 
 Gem::Specification.new do |s|
   s.authors       = ['Jean-Philippe Doyle','Josh Delsman','Aleksandrs Ļedovskis','Douglas Jarquin', 'Amit Barvaz', 'Jan Lindblom']
-  s.email         = ['jeanphilippe.doyle@hooktstudios.com']
+  s.email         = ['jeanphilippe.doyle@hooktstudios.com', 'aleksandrs@ledovskis.lv']
   s.description   = 'Enables static websites deployment to Amazon S3 website buckets using Capistrano.'
   s.summary       = 'Build and deploy a static website to Amazon S3'
   s.homepage      = 'http://github.com/hooktstudios/capistrano-s3'
@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.name          = 'capistrano-s3'
   s.require_paths = ['lib']
   s.version       = Capistrano::S3::VERSION
-  s.cert_chain  = ['certs/j15e.pem']
+  s.cert_chain  = ['certs/aleksandrs-ledovskis.pem']
   s.signing_key = File.expand_path("~/.ssh/gem-private_key.pem") if $0 =~ /gem\z/
 
   # Gem dependencies
