@@ -114,6 +114,22 @@ set :redirect_options, {
 Valid redirect destination should either start with `http` or `https` scheme,
 or begin with leading slash `/`.
 
+### Upload only compressed versions
+
+You can configure capistrano-s3 to only upload gzipped assets (when they are present) and remove the `.gz` suffix. This feature comes in handy because Amazon S3 does not provide a way to decide when to serve compressed or uncompressed content depending on `Accept-Encoding` header.
+
+For example: if you have `main.js` and `main.js.gz` capistrano-s3 will upload the compressed version as `main.js` to S3.
+
+Please note:
+  1. Only the file is renamed, the original `Content-Type`, and `Content-Encoding: gzip` headers will be served
+  2. By enabling this feature way **only** compressed assets will be served. Browser support although is [pretty good](http://webmasters.stackexchange.com/questions/22217/which-browsers-handle-content-encoding-gzip-and-which-of-them-has-any-special).
+
+Just add to your configuration:
+
+```ruby
+set :only_gzip, true
+```
+
 ## Example of usage
 
 Our Ruby stack for static websites:
