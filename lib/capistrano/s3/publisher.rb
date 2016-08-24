@@ -7,8 +7,9 @@ module Capistrano
     module Publisher
       LAST_PUBLISHED_FILE = '.last_published'
 
-      def self.publish!(s3_endpoint, key, secret, bucket, source, only_gzip, extra_options)
+      def self.publish!(s3_endpoint, key, secret, bucket, source, distribution_id, invalidations, only_gzip, extra_options)
         s3 = self.establish_s3_client_connection!(s3_endpoint, key, secret)
+        updated = false
 
         self.files(source).each do |file|
           if !File.directory?(file)
@@ -20,6 +21,22 @@ module Capistrano
 
             self.put_object(s3, bucket, path, file, only_gzip, extra_options)
           end
+        end
+
+        # invalidate CloudFront distribution if needed
+        if distribution_id && !invalidations.empty?
+          cf = self.establish_cf_client_connection!(key, secret)
+
+          cf.create_invalidation({
+            :distribution_id => distribution_id,
+            :invalidation_batch => {
+              :paths => {
+                :quantity => invalidations.count,
+                :items => invalidations
+              },
+              :caller_reference => SecureRandom.hex
+            }
+          })
         end
 
         FileUtils.touch(LAST_PUBLISHED_FILE)
@@ -43,6 +60,10 @@ module Capistrano
             :access_key_id => key,
             :secret_access_key => secret
           )
+        end
+
+        def self.establish_cf_client_connection!(key, secret)
+          self.establish_connection!(AWS::CloudFront::Client, nil, key, secret)
         end
 
         def self.establish_s3_client_connection!(s3_endpoint, key, secret)
