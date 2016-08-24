@@ -6,7 +6,8 @@ module Capistrano
         :bucket_write_options => { :acl => :public_read },
         :s3_endpoint          => "s3.amazonaws.com",
         :redirect_options     => {},
-        :only_gzip            => false
+        :only_gzip            => false,
+        :invalidations        => []
       }
 
       def self.populate(context, set_method)

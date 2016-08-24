@@ -130,6 +130,15 @@ Just add to your configuration:
 set :only_gzip, true
 ```
 
+### CloudFront invalidation
+
+If you set a CloudFront distribution ID (not the URL!) and an array of paths, capistrano-s3 will post an invalidation request. CloudFront supports wildcard invalidations. For example:
+
+```ruby
+set :distribution_id, "CHANGETHIS"
+set :invalidations, [ "/index.html", "/assets/*" ]
+```
+
 ## Example of usage
 
 Our Ruby stack for static websites:
