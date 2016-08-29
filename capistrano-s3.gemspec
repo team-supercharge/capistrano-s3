@@ -18,6 +18,9 @@ Gem::Specification.new do |s|
   s.cert_chain  = ['certs/aleksandrs-ledovskis.pem']
   s.signing_key = File.expand_path("~/.ssh/gem-private_key.pem") if $0 =~ /gem\z/
 
+  # Min rubies
+  s.required_ruby_version = ">= 2.1"
+
   # Gem dependencies
   s.add_runtime_dependency 'aws-sdk',    '~> 1.11'
   s.add_runtime_dependency 'capistrano', '>= 2'
