@@ -1,9 +1,9 @@
 # CHANGELOG
 
-## master
+## v1.0.0
 
-Drop support for ruby < 2.1
-Add option to upload only gzipped files
+Major change : drop support for ruby < 2.1 
+Add option to upload only gzipped files (#27)
 
 ## v0.3.0
 
