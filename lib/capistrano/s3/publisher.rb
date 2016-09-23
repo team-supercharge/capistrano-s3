@@ -7,17 +7,18 @@ module Capistrano
     module Publisher
       LAST_PUBLISHED_FILE = '.last_published'
 
-      def self.publish!(s3_endpoint, key, secret, bucket, source, extra_options)
+      def self.publish!(s3_endpoint, key, secret, bucket, source, only_gzip, extra_options)
         s3 = self.establish_s3_client_connection!(s3_endpoint, key, secret)
 
         self.files(source).each do |file|
           if !File.directory?(file)
             next if self.published?(file)
+            next if only_gzip && self.has_gzipped_version?(file)
 
             path = self.base_file_path(source, file)
             path.gsub!(/^\//, "") # Remove preceding slash for S3
 
-            self.put_object(s3, bucket, path, file, extra_options)
+            self.put_object(s3, bucket, path, file, only_gzip, extra_options)
           end
         end
 
@@ -65,7 +66,7 @@ module Capistrano
           File.mtime(file) < File.mtime(LAST_PUBLISHED_FILE)
         end
 
-        def self.put_object(s3, bucket, path, file, extra_options)
+        def self.put_object(s3, bucket, path, file, only_gzip, extra_options)
           base_name = File.basename(file)
           mime_type = mime_type_for_file(base_name)
           options   = {
@@ -84,6 +85,9 @@ module Capistrano
             if mime_type.sub_type == "gzip"
               options.merge!(build_gzip_content_encoding_hash)
               options.merge!(build_gzip_content_type_hash(file, mime_type))
+
+              # upload as original file name
+              options.merge!(key: self.orig_name(path)) if only_gzip
             end
           end
 
@@ -104,8 +108,12 @@ module Capistrano
           { :content_encoding => "gzip" }
         end
 
+        def self.has_gzipped_version?(file)
+          File.exist?(self.gzip_name(file))
+        end
+
         def self.build_gzip_content_type_hash(file, mime_type)
-          orig_name = file.sub(/\.gz$/, "")
+          orig_name = self.orig_name(file)
           orig_mime = mime_type_for_file(orig_name)
 
           return {} unless orig_mime && File.exist?(orig_name)
@@ -116,6 +124,14 @@ module Capistrano
         def self.mime_type_for_file(file)
           type = MIME::Types.type_for(file)
           (type && !type.empty?) ? type[0] : nil
+        end
+
+        def self.gzip_name(file)
+          "#{file}.gz"
+        end
+
+        def self.orig_name(file)
+          file.sub(/\.gz$/, "")
         end
     end
   end
