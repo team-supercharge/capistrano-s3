@@ -7,11 +7,11 @@ module Capistrano
     module Publisher
       LAST_PUBLISHED_FILE = '.last_published'
 
-      def self.publish!(s3_endpoint, key, secret, bucket, source, distribution_id, invalidations, only_gzip, extra_options)
+      def self.publish!(s3_endpoint, key, secret, bucket, source, distribution_id, invalidations, exclusions, only_gzip, extra_options)
         s3 = self.establish_s3_client_connection!(s3_endpoint, key, secret)
         updated = false
 
-        self.files(source).each do |file|
+        self.files(source, exclusions).each do |file|
           if !File.directory?(file)
             next if self.published?(file)
             next if only_gzip && self.has_gzipped_version?(file)
@@ -78,8 +78,8 @@ module Capistrano
           file.gsub(root, "")
         end
 
-        def self.files(deployment_path)
-          Dir.glob("#{deployment_path}/**/*")
+        def self.files(deployment_path, exclusions)
+          Dir.glob("#{deployment_path}/**/*") - Dir.glob(exclusions.map{|e| "#{deployment_path}/#{e}"})
         end
 
         def self.published?(file)
