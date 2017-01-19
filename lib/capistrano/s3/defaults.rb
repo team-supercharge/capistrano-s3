@@ -7,7 +7,8 @@ module Capistrano
         :s3_endpoint          => "s3.amazonaws.com",
         :redirect_options     => {},
         :only_gzip            => false,
-        :invalidations        => []
+        :invalidations        => [],
+        :exclusions           => []
       }
 
       def self.populate(context, set_method)
