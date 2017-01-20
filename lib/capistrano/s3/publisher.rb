@@ -1,4 +1,4 @@
-require 'aws/s3'
+require 'aws-sdk'
 require 'mime/types'
 require 'fileutils'
 
@@ -6,9 +6,10 @@ module Capistrano
   module S3
     module Publisher
       LAST_PUBLISHED_FILE = '.last_published'
+      LAST_INVALIDATION_FILE = '.last_invalidation'
 
-      def self.publish!(s3_endpoint, key, secret, bucket, source, distribution_id, invalidations, exclusions, only_gzip, extra_options)
-        s3 = self.establish_s3_client_connection!(s3_endpoint, key, secret)
+      def self.publish!(region, key, secret, bucket, source, distribution_id, invalidations, exclusions, only_gzip, extra_options)
+        s3 = self.establish_s3_client_connection!(region, key, secret)
         updated = false
 
         self.files(source, exclusions).each do |file|
@@ -25,9 +26,9 @@ module Capistrano
 
         # invalidate CloudFront distribution if needed
         if distribution_id && !invalidations.empty?
-          cf = self.establish_cf_client_connection!(key, secret)
+          cf = self.establish_cf_client_connection!(region, key, secret)
 
-          cf.create_invalidation({
+          response = cf.create_invalidation({
             :distribution_id => distribution_id,
             :invalidation_batch => {
               :paths => {
@@ -37,41 +38,57 @@ module Capistrano
               :caller_reference => SecureRandom.hex
             }
           })
+
+          if response && response.successful?
+            File.open(LAST_INVALIDATION_FILE, 'w') { |file| file.write(response[:invalidation][:id]) }
+          end
         end
 
         FileUtils.touch(LAST_PUBLISHED_FILE)
       end
 
-      def self.clear!(s3_endpoint, key, secret, bucket)
-        s3 = self.establish_s3_connection!(s3_endpoint, key, secret)
+      def self.clear!(region, key, secret, bucket)
+        s3 = self.establish_s3_connection!(region, key, secret)
         s3.buckets[bucket].clear!
 
         FileUtils.rm(LAST_PUBLISHED_FILE)
+        FileUtils.rm(LAST_INVALIDATION_FILE)
+      end
+
+      def self.check_invalidation(region, key, secret, distribution_id)
+        last_invalidation_id = File.read(LAST_INVALIDATION_FILE).strip
+
+        cf = self.establish_cf_client_connection!(region, key, secret)
+        cf.wait_until(:invalidation_completed, distribution_id: distribution_id, id: last_invalidation_id) do |w|
+          w.max_attempts = nil
+          w.delay = 30
+        end
       end
 
       private
 
         # Establishes the connection to Amazon S3
-        def self.establish_connection!(klass, s3_endpoint, key, secret)
+        def self.establish_connection!(klass, region, key, secret)
           # Send logging to STDOUT
-          AWS.config(:logger => ::Logger.new(STDOUT))
+          Aws.config[:logger] = ::Logger.new(STDOUT)
+          Aws.config[:log_formatter] = Aws::Log::Formatter.colored
           klass.new(
-            :s3_endpoint => s3_endpoint,
+            :region => region,
             :access_key_id => key,
             :secret_access_key => secret
           )
         end
 
-        def self.establish_cf_client_connection!(key, secret)
-          self.establish_connection!(AWS::CloudFront::Client, nil, key, secret)
+        def self.establish_cf_client_connection!(region, key, secret)
+          self.establish_connection!(Aws::CloudFront::Client, region, key, secret)
         end
 
-        def self.establish_s3_client_connection!(s3_endpoint, key, secret)
-          self.establish_connection!(AWS::S3::Client, s3_endpoint, key, secret)
+        def self.establish_s3_client_connection!(region, key, secret)
+          self.establish_connection!(Aws::S3::Client, region, key, secret)
         end
 
-        def self.establish_s3_connection!(s3_endpoint, key, secret)
-          self.establish_connection!(AWS::S3, s3_endpoint, key, secret)
+        def self.establish_s3_connection!(region, key, secret)
+          self.establish_connection!(Aws::S3, region, key, secret)
         end
 
         def self.base_file_path(root, file)
@@ -91,10 +108,10 @@ module Capistrano
           base_name = File.basename(file)
           mime_type = mime_type_for_file(base_name)
           options   = {
-            :bucket_name => bucket,
-            :key         => path,
-            :data        => open(file),
-            :acl         => :public_read,
+            :bucket => bucket,
+            :key    => path,
+            :body   => open(file),
+            :acl    => :public_read,
           }
 
           options.merge!(build_redirect_hash(path, extra_options[:redirect]))

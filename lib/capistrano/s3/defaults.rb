@@ -4,7 +4,7 @@ module Capistrano
       DEFAULTS = {
         :deployment_path      => proc { Dir.pwd.gsub("\n", "") + "/public" },
         :bucket_write_options => { :acl => :public_read },
-        :s3_endpoint          => "s3.amazonaws.com",
+        :region               => 'us-east-1',
         :redirect_options     => {},
         :only_gzip            => false,
         :invalidations        => [],
