@@ -2,7 +2,7 @@ language: ruby
 dist: trusty
 bundler_args: --without debug release
 before_install:
-  - gem install bundler
+  - ruby -v | (grep -v "rubinius" && gem install bundler) || echo 0
 rvm:
   - 2.2.6
   - 2.3.3
