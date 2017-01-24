@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v1.1.0
+
+Feature : Add support for Cloudfront invalidations (#29) @exoszajzbuk
+
 ## v1.0.0
 
 Major change : drop support for ruby < 2.1 
