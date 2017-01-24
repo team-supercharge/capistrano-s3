@@ -139,6 +139,14 @@ set :distribution_id, "CHANGETHIS"
 set :invalidations, [ "/index.html", "/assets/*" ]
 ```
 
+### Exclude files and directories
+
+You can set a list of files or directories to exclude from upload. The path must relative to `deployment_path` and use the `dir/**/*` pattern to exclude directories.
+
+```ruby
+set :exclusions, [ "index.html", "resources/**/*" ]
+```
+
 ## Example of usage
 
 Our Ruby stack for static websites:
