@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v1.2.0
+
+Feature : Add exclusions (#30) @exoszajzbuk
+
 ## v1.1.0
 
 Feature : Add support for Cloudfront invalidations (#29) @exoszajzbuk
