@@ -1,3 +1,7 @@
+notifications:
+  email:
+    on_success: never
+    on_failure: change
 language: ruby
 dist: trusty
 bundler_args: --without debug release
