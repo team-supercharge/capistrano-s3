@@ -11,13 +11,18 @@ module Capistrano
       namespace :s3 do
         desc "Empties bucket of all files. Caution when using this command, as it cannot be undone!"
         task :empty do
-          S3::Publisher.clear!(s3_endpoint, access_key_id, secret_access_key, bucket)
+          S3::Publisher.clear!(region, access_key_id, secret_access_key, bucket)
+        end
+
+        desc "Waits until the last CloudFront invalidation batch is completed"
+        task :wait_for_invalidation do
+          S3::Publisher.check_invalidation(region, access_key_id, secret_access_key, distribution_id)
         end
 
         desc "Upload files to the bucket in the current state"
         task :upload_files do
           extra_options = { :write => bucket_write_options, :redirect => redirect_options }
-          S3::Publisher.publish!(s3_endpoint, access_key_id, secret_access_key,
+          S3::Publisher.publish!(region, access_key_id, secret_access_key,
                              bucket, deployment_path, distribution_id, invalidations, exclusions, only_gzip, extra_options)
         end
       end

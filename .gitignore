@@ -1,3 +1,4 @@
 *.gem
 .last_published
+.last_invalidation
 Gemfile.lock

@@ -77,14 +77,14 @@ Add content to your public folder and run deploy command:
 
 ## Advanced options
 
-### Custom endpoint
+### Custom region
 
 If your bucket is not in the default US Standard region,
-set [endpoint](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region)
+set [region](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region)
 with:
 
 ```ruby
-set :s3_endpoint, 's3-eu-west-1.amazonaws.com'
+set :region, 'eu-west-1'
 ```
 
 ### Write options
@@ -138,6 +138,8 @@ If you set a CloudFront distribution ID (not the URL!) and an array of paths, ca
 set :distribution_id, "CHANGETHIS"
 set :invalidations, [ "/index.html", "/assets/*" ]
 ```
+
+If you want to wait until the invalidation batch is completed (e.g. on a CI server), you can run `cap <stage> deploy:s3:wait_for_invalidation`. The command will wait indefinitely until the invalidation is completed.
 
 ### Exclude files and directories
 
